@@ -1,16 +1,26 @@
-// Author: Michael C. Bataller
-// 
-// Instructions: Paste this in your 
+// Instructions: Paste this in your
 // browser's DevTools console.
-window.scrollTo(0, document.body.scrollHeight)
-let yourRating = 3;
-try {
-    (function (rating = 1) {
-        for (var i = 1; i <= 40; i++) {
-            document.getElementById(`q${i}${rating}`).checked = true;
-        }
-    })(yourRating)
+
+function run(rating) {
+  if (rating < 1 || rating > 5) {
+    return alert("Please type a rating in 1-5.");
+  }
+
+  // 0 to 4
+  const ratingIndex = rating - 1;
+  const ratingLetters = ["a", "b", "c", "d", "e"];
+  try {
+    let i = 0;
+    while (true) {
+      const selectedRating = ratingLetters[ratingIndex];
+      const question = document.getElementById(`q${i}${selectedRating}`);
+      question.checked = true;
+
+      i++;
+    }
+  } catch (err) {
+    window.scrollTo(0, document.body.scrollHeight);
+    document.getElementsByName("btnSubmit")[0].click();
+  }
 }
-catch (err) {
-    document.getElementById('btnsubmit').click()
-}
+run(3);
