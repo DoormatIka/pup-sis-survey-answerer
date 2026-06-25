@@ -1,26 +1,20 @@
-// Instructions: Paste this in your
-// browser's DevTools console.
-
 function run(rating) {
   if (rating < 1 || rating > 5) {
     return alert("Please type a rating in 1-5.");
   }
 
-  // 0 to 4
-  const ratingIndex = rating - 1;
+  const ratingIndex = 5 - rating;
   const ratingLetters = ["a", "b", "c", "d", "e"];
-  try {
-    let i = 0;
-    while (true) {
-      const selectedRating = ratingLetters[ratingIndex];
-      const question = document.getElementById(`q${i}${selectedRating}`);
-      question.checked = true;
+  const selectedLetter = ratingLetters[ratingIndex];
 
-      i++;
-    }
-  } catch (err) {
-    window.scrollTo(0, document.body.scrollHeight);
-    document.getElementsByName("btnSubmit")[0].click();
+  let i = 1;
+  while (true) {
+    const question = document.getElementById(`q${i}${selectedLetter}`);
+    if (!question) break;
+    question.checked = true;
+    i++;
   }
+
+  window.scrollTo(0, document.body.scrollHeight);
 }
-run(3);
+run(3); // <<< change this to the total rating!!
